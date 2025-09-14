@@ -6,6 +6,7 @@
   "input_schema": [
     {
       "name": "country_iso",
+      "description": "ISO of the country",
       "type": "string",
       "required": true,
       "constraints": {
