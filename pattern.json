@@ -21,9 +21,7 @@
       "name": "Fetch major cities from LLM",
       "strategy": "gpt",
       "arguments": {
-        "prompt": "List the major cities in the country with ISO code @{{input.country_iso}}. Return them as a JSON array of strings. Include at least 5 cities and ensure they are real, well-known cities in that country.",
-        "model": "gpt-4o",
-        "temperature": 0.3
+        "prompt": "List the major cities in the country with ISO code @{{input.country_iso}}. Return them as a JSON array of strings. Include at least 5 cities and ensure they are real, well-known cities in that country."
       },
       "output_schema": [
         {
@@ -34,27 +32,6 @@
             "min_items": 5,
             "item_type": "string"
           }
-        }
-      ]
-    },
-    {
-      "id": "step/2",
-      "name": "Check if capital is in the list",
-      "strategy": "code",
-      "arguments": {
-        "cities": "@{{step1.cities}}",
-        "country_iso": "@{{input.country_iso}}"
-      },
-      "config": {
-        "code": "function checkCapital(cities, countryIso) {\n  const capitals = {\n    'PL': 'Warsaw',\n    'DE': 'Berlin',\n    'FR': 'Paris',\n    'GB': 'London',\n    'US': 'Washington'\n  };\n  \n  const capital = capitals[countryIso];\n  if (!capital) return false;\n  \n  return cities.includes(capital);\n}\n\nreturn checkCapital(cities, countryIso);",
-        "memory_limit_mb": 64,
-        "timeout_ms": 3000
-      },
-      "output_schema": [
-        {
-          "name": "has_capital",
-          "type": "bool",
-          "required": true
         }
       ]
     }
