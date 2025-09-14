@@ -1,0 +1,79 @@
+{
+  "id": "test/fitness-demo:1.0",
+  "name": "Fitness Demo Pattern",
+  "description": "A demonstration pattern with fitness contract for testing the evaluation system",
+  "labels": ["demo", "fitness", "test"],
+  "input_schema": [
+    {
+      "name": "country_iso",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "min_length": 2,
+        "max_length": 3,
+        "pattern": "^[A-Z]{2,3}$"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "step/1",
+      "name": "Fetch major cities from LLM",
+      "strategy": "gpt",
+      "arguments": {
+        "prompt": "List the major cities in the country with ISO code @{{input.country_iso}}. Return them as a JSON array of strings. Include at least 5 cities and ensure they are real, well-known cities in that country.",
+        "model": "gpt-4o",
+        "temperature": 0.3
+      },
+      "output_schema": [
+        {
+          "name": "cities",
+          "type": "array",
+          "required": true,
+          "constraints": {
+            "min_items": 5,
+            "item_type": "string"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step/2",
+      "name": "Check if capital is in the list",
+      "strategy": "code",
+      "arguments": {
+        "cities": "@{{step1.cities}}",
+        "country_iso": "@{{input.country_iso}}"
+      },
+      "config": {
+        "code": "function checkCapital(cities, countryIso) {\n  const capitals = {\n    'PL': 'Warsaw',\n    'DE': 'Berlin',\n    'FR': 'Paris',\n    'GB': 'London',\n    'US': 'Washington'\n  };\n  \n  const capital = capitals[countryIso];\n  if (!capital) return false;\n  \n  return cities.includes(capital);\n}\n\nreturn checkCapital(cities, countryIso);",
+        "memory_limit_mb": 64,
+        "timeout_ms": 3000
+      },
+      "output_schema": [
+        {
+          "name": "has_capital",
+          "type": "bool",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "fitness_contract": {
+    "description": "The pattern should return a list of countries with their capitals in JSON format, then extract one capital and verify its relation to Poland.",
+    "critical_constraints": [
+      "Output must be valid JSON",
+      "At least 5 cities must be returned",
+      "Cities must be real and well-known"
+    ],
+    "constraints": [
+      "Output from step/1 must be a valid JSON array of objects with 'cities' field",
+      "Step/2 must correctly check if the capital is in the city list",
+      "At least 5 unique cities must be present",
+      "Cities must be geographically accurate for the given country"
+    ],
+    "check_methods": {
+      "llm_review": true
+    }
+  }
+}
