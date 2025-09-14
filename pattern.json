@@ -30,6 +30,7 @@
       "output_schema": [
         {
           "name": "cities",
+          "description": "list of cities",
           "type": "array",
           "required": true,
           "constraints": {
