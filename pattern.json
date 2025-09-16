@@ -23,7 +23,7 @@
       "description": "test",
       "strategy": "gpt",
       "arguments": {
-        "prompt": "List the major cities in the country with ISO code @{{input.country_iso}}. Return them as a JSON array of strings. Include at least 3 cities and ensure they are real, well-known cities in that country."
+        "prompt": "List the major cities in the country with ISO code @{{input.country_iso}}. Return them as a JSON array of strings. Include at least 5 cities and ensure they are real, well-known cities in that country."
       },
       "config": {
         "model": "gpt-4o"
