@@ -1,5 +1,5 @@
 {
-  "id": "aventez/idora-test-pattern:1.5",
+  "id": "aventez/idora-test-pattern:1.0",
   "name": "Idora Test Pattern",
   "description": "A pattern to fetch major cities of a given country",
   "labels": ["demo", "fitness", "test"],
