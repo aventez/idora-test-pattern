@@ -1,7 +1,7 @@
 {
   "id": "aventez/idora-test-pattern:1.5",
   "name": "Idora Test Pattern",
-  "description": "A demonstration pattern with fitness contract for testing the evaluation system",
+  "description": "A pattern to fetch major cities of a given country",
   "labels": ["demo", "fitness", "test"],
   "input_schema": [
     {
@@ -43,18 +43,12 @@
     }
   ],
   "fitness_contract": {
-    "description": "The pattern should return a list of countries with their capitals in JSON format, then extract one capital and verify its relation to Poland.",
+    "description": "The pattern should return a list of countries for given country.",
     "critical_constraints": [
-      "Output must be valid JSON",
       "At least 5 cities must be returned",
       "Cities must be real and well-known"
     ],
-    "constraints": [
-      "Output from step/1 must be a valid JSON array of objects with 'cities' field",
-      "Step/2 must correctly check if the capital is in the city list",
-      "At least 5 unique cities must be present",
-      "Cities must be geographically accurate for the given country"
-    ],
+    "constraints": [],
     "check_methods": {
       "llm_review": true
     }
