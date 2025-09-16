@@ -1,12 +1,12 @@
 {
-  "id": "aventez/idora-test-pattern:1.1",
+  "id": "aventez/idora-test-pattern:1.2",
   "name": "Idora Test Pattern",
   "description": "A demonstration pattern with fitness contract for testing the evaluation system",
   "labels": ["demo", "fitness", "test"],
   "input_schema": [
     {
       "name": "country_iso",
-      "description": "ISO of the country",
+      "description": "ISO of the country (test)",
       "type": "string",
       "required": true,
       "constraints": {
