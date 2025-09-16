@@ -1,5 +1,5 @@
 {
-  "id": "aventez/idora-test-pattern:1.4",
+  "id": "aventez/idora-test-pattern:1.5",
   "name": "Idora Test Pattern",
   "description": "A demonstration pattern with fitness contract for testing the evaluation system",
   "labels": ["demo", "fitness", "test"],
