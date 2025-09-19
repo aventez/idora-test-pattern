@@ -1,5 +1,5 @@
 {
-  "id": "aventez/idora-test-pattern:1.0",
+  "id": "aventez/idora-test-pattern:1.1",
   "name": "Idora Test Pattern",
   "description": "A pattern to fetch major cities of a given country",
   "labels": ["demo", "fitness", "test"],
@@ -43,7 +43,7 @@
     }
   ],
   "fitness_contract": {
-    "description": "The pattern should return a list of countries for given country.",
+    "description": "The pattern should return a list of cities for given country.",
     "critical_constraints": [
       "At least 5 cities must be returned",
       "Cities must be real and well-known"
